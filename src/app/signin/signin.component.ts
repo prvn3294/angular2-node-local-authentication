@@ -14,9 +14,9 @@ export class SigninComponent implements OnInit {
   signinForm : FormGroup
   email = new FormControl('' , Validators.required)
   password = new FormControl('' , Validators.required)
+  errmsg:string
   
   user:any
-
 
   constructor( 
       private formBuilder : FormBuilder,
@@ -40,17 +40,15 @@ export class SigninComponent implements OnInit {
       this.authService.signinUser(this.signinForm.value)
         .subscribe(result => {
             if(result.err){
-              console.log(result.err)
+              this.errmsg= result.err              
             }
             else if(result.error){
-              console.log(result.err)
+              this.errmsg= result.error              
             }
             else if(result.redirect){
-              this.router.navigate([result.redirect])              
-              console.log(result.redirect)
+              this.router.navigate([result.redirect])                            
               this.user = result.crntuser
-              this.shareData.setData(this.user)
-              console.log(this.user)
+              this.shareData.setData(this.user)              
             }            
       })  
   }  

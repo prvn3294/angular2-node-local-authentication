@@ -3,9 +3,9 @@
 
     <h1><span class="fa fa-sign-in"></span> Login</h1>
 
-    <!--
-        <div class="alert alert-danger"><%= message %></div>
-    -->
+
+    <div class="alert alert-danger" *ngIf="errmsg">{{errmsg}}</div>
+
 
     <!-- LOGIN FORM -->    
      <form [formGroup]="signinForm" (ngSubmit)="onSignin()">

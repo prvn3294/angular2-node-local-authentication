@@ -16,6 +16,7 @@ export class SignupComponent implements OnInit {
   signupForm : FormGroup
   email = new FormControl('' , Validators.required)
   password = new FormControl('' , Validators.required)
+  errmsg:string
 
   constructor(private formbuilder : FormBuilder , 
   private authService : 
@@ -38,20 +39,17 @@ export class SignupComponent implements OnInit {
     this.authService.signupUser(this.signupForm.value).subscribe(
       result => {
             if(result.err){
-              console.log(result.err)
+              this.errmsg = result.err             
             }
             else if(result.error){
-              console.log(result.err)
+              this.errmsg = result.error             
             }
             else if(result.redirect){
-              this.router.navigate([result.redirect])
-              console.log(result.redirect)
+              this.router.navigate([result.redirect])             
               this.user = result.crntuser
-              this.shareData.setData(this.user)
-              console.log(this.user)
-
+              this.shareData.setData(this.user)             
             }            
-      }
+       }
     )
   }
 }

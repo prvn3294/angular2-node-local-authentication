@@ -20,24 +20,6 @@ export class AuthenticationService{
                 return data = data.json()                
             })
     }
-
-/*
-    isAuthenticated():Observable<boolean>{                
-       this.http.get('/isAuth').map( data=>{ 
-                data = data.json()
-                return data    
-            }). 
-            subscribe( result=> {                    
-                if(result['authenticated']){
-                    this.isloggedin =  result['authenticated']                                                                            
-                    console.log(result['authenticated'])                                               
-             } 
-         })
-      return  this.isloggedin     
-    }
-
- */
-
     
     isAuthenticated(): Observable<any>{                
        return this.http.get('/isAuth').map( data=> data.json())             
@@ -54,8 +36,7 @@ export class AuthenticationService{
 
     logout() {
          this.http.get('/logout')
-             .subscribe( data => {                 
-                 console.log(data.json())
+             .subscribe( data => {                                  
                  this.isloggedin=false
                  this.router.navigate(['home'])
         })

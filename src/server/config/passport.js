@@ -40,9 +40,9 @@ module.exports = function(passport) {
                     return done(err);
                 // if no user is found, return the message
                 if (!user)
-                    return done(null, false, req.flash('loginMessage', 'No user found.'));
+                    return done(null, { error: 'This Email doesn\'t exists' } );
                 if (!user.validPassword(password))
-                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+                    return done(null,{ error: 'Oops Wrong Password !' } );
                 // all is well, return user
                 else
                     return done(null, user);
@@ -71,10 +71,9 @@ module.exports = function(passport) {
                     // if there are any errors, return the error
                     if (err)
                         return done(err);
-
                     // check to see if theres already a user with that email
                     if (user) {
-                        return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                        return done(null, { error: 'That email is already taken.' });
                     } else {
 
                         // create the user
